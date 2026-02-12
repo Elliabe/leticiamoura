@@ -69,6 +69,40 @@ body {
     object-fit: cover;
 }
 
+/* Hamburger Button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.hamburger-line {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.active .hamburger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active .hamburger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
 .nav {
     display: flex;
     gap: 2rem;
@@ -840,39 +874,77 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
     .header .container {
-        flex-direction: column;
-        gap: 1rem;
+        flex-direction: row;
+        flex-wrap: nowrap;
     }
-    
+
     .nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 300px;
+        height: 100vh;
+        background-color: var(--white);
         flex-direction: column;
-        gap: 1rem;
-        text-align: center;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 1000;
     }
-    
+
+    .nav.active {
+        right: 0;
+    }
+
+    .nav a {
+        font-size: 1.2rem;
+    }
+
+    .nav-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.4);
+        z-index: 999;
+    }
+
+    .nav-overlay.active {
+        display: block;
+    }
+
     .hero h1 {
         font-size: 2rem;
     }
-    
+
     .hero p {
         font-size: 1.1rem;
     }
-    
+
     .sobre-content {
         grid-template-columns: 1fr;
     }
-    
+
     .formacao-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .hero-buttons,
     .cta-buttons {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .btn {
         width: 100%;
         max-width: 300px;
